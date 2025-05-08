@@ -82,7 +82,7 @@ main {
 }
 
 .acDetails {
-  display: flex;
+  display: none;
   flex-direction: column;
   width: 70%;
   height: 100%;

@@ -2,6 +2,41 @@ let button = document.querySelector("button")
 let inputbox = document.querySelector("input")
 let acDetails = document.querySelector(".acDetails")
 
+
+inputbox.addEventListener("input", () => {
+   if (inputbox.value.length > 0) {
+
+
+      acDetails.style.display = "flex"
+      acDetails.innerHTML =
+         `<div class="shine">
+   <div class="top">
+       <div class="img-div shining"></div>
+       <div class="details">
+           <div class="shining"></div>
+           <div class="shining"></div>
+           <div class="lower">
+               <p class="shining"></p>
+               <p class="shining"></p>
+               <p class="shining"></p>
+           </div>
+       </div>
+   </div>
+
+   <div class="bottom">
+       <div class="shining"></div>
+       <div class="lower">
+           <p class="shining"></p>
+           <p class="shining"></p>
+           <p class="shining"></p>
+           <p class="shining"></p>
+       </div>
+   </div>
+</div>`
+   }
+   else acDetails.style.display = "none"
+})
+
 button.addEventListener('click', (event) => {
    // event.preventDefault()   //if we have a form 
 
@@ -11,6 +46,7 @@ button.addEventListener('click', (event) => {
    let userRepos = (username) => fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=8`)
       .then(resolove => {
          if (!resolove.ok) {
+            alert("User Not Found")
             throw new Error("Something went wrong");
          }
          return resolove.json()
@@ -26,7 +62,7 @@ button.addEventListener('click', (event) => {
       })
    userDetails(userinp).then((data) => {
       console.log(data);
-      
+
       let gitDetails = `
         <div class="top-sec">
                 <div class="img-cont">
@@ -49,7 +85,7 @@ button.addEventListener('click', (event) => {
       console.log(data);
       acDetails.style.height = "fit-content"
       let repos = document.createElement("div")
-      repos.setAttribute("id","repoCont")
+      repos.setAttribute("id", "repoCont")
       data.forEach(repo => {
          let repoDiv = document.createElement("div")
          repoDiv.setAttribute("class", "repo")
@@ -65,7 +101,7 @@ button.addEventListener('click', (event) => {
             </span>
                 </span>
                 `;
-      repos.append(repoDiv);
+         repos.append(repoDiv);
       });
       acDetails.append(repos);
    });
